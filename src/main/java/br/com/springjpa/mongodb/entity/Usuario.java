@@ -2,41 +2,36 @@ package br.com.springjpa.mongodb.entity;
 
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 
 	private String nome;
 
 	private String email;
-	
-	@ManyToMany
+
 	private Set<Role> roles;
 
-	public Usuario(){
+	public Usuario() {
 		super();
-	}	
-	
-	public Usuario(String nome, String email){
+	}
+
+	public Usuario(String nome, String email) {
 		super();
 		this.nome = nome;
 		this.email = email;
 	}
-	
-	public Long getId() {
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -54,6 +49,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }

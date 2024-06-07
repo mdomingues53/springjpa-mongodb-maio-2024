@@ -1,18 +1,19 @@
 package br.com.springjpa.mongodb.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import br.com.springjpa.mongodb.entity.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepository extends MongoRepository<Usuario, Long>{
 
-	Usuario findByNomeIgnoreCase(String nome);
+	List<Usuario> findByNomeIgnoreCaseLike(String nome);		
 	
-	@Query("select u from Usuario u where u.nome like %?1%")
-	Usuario findByLikeNome(String nome);
+	List<Usuario> findByNomeIgnoreCase(String nome);	
 	
-	
-	Usuario findByEmail(String email);
+	@Query("{ 'email' : ?0}")
+	List<Usuario> findByEmailUsuario(String email);
 	
 }
